@@ -79,24 +79,31 @@
 		];
 		fontDir.enable = true;
 		fontconfig = {
+			enable = true;
 			defaultFonts = {
 				serif = ["Noto Serif CJK JP" "Noto Color Emoji"];
 				sansSerif = ["Noto Sans CJK JP" "Noto Color Emoji"];
 				monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
 				emoji = ["Noto Color Emoji"];
 			};
+			antialias = true;
 		};
 	};
 
-	# Enable the X11 windowing system.
-	services.xserver.enable = true;
+	services.xserver = {
+		# Enable the X11 windowing system.
+		enable = true;
 
-	# Enable the GNOME Desktop Environment.
-	services.xserver.displayManager.gdm.enable = true;
-	services.xserver.desktopManager.gnome.enable = true;
+		# Enable the GNOME Desktop Environment.
+		# displayManager.gdm.enable = true;
+		# desktopManager.gnome.enable = true;
 
-	# Configure keymap in X11
-	services.xserver.xkb.layout = "jp";
+		# Enable the Pantheon Desktop Environment.
+		desktopManager.pantheon.enable = true;
+
+		# Configure keymap in X11
+		xkb.layout = "jp";
+	};
 
 	# Configure console keymap
 	console.keyMap = "jp106";
@@ -147,7 +154,6 @@
 		chromium
 		git
 		gh
-		vscode
 		zsh-prezto
 	];
 
@@ -185,6 +191,11 @@
 			enableCompletion = true;
 			autosuggestions.enable = true;
 			syntaxHighlighting.enable = true;
+		};
+
+		direnv = {
+			enable = true;
+			nix-direnv.enable = true;
 		};
 
 		# reduce noise for a microphone
